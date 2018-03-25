@@ -18,13 +18,14 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(255);
 
+
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
             $event->menu->add('CORREO');
             $event->menu->add(
                 [
                     'text' => 'Mensajes',
-                    'url' => '/inbox/' . Auth::user()->email,
-                    'label' => 18,
+                    'url' => '/messages',
+                    'label' => @include('messages.unread-count'),
                 ]
             );
             $event->menu->add(

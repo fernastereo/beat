@@ -2,12 +2,15 @@
 
 namespace App;
 
+use App\Company;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Cmgmyr\Messenger\Traits\Messagable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use Messagable;
 
     /**
      * The attributes that are mass assignable.
@@ -29,5 +32,16 @@ class User extends Authenticatable
 
     public function company(){
         return $this->belongsTo(Company::class);
+    }
+
+    public function contacts($id){
+        $userCompany = User::find($id);
+            
+        $users = User::where([
+            ['id', '<>', $id],
+            ['company_id', $userCompany->company_id],
+        ])->get();
+
+        return $users;
     }
 }
