@@ -147,7 +147,7 @@
                                   <li class="dropdown messages-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                       <i class="fa fa-users"></i>
-                                      <span class="label label-warning">10</span>
+                                      
                                     </a>
                                     <ul class="dropdown-menu">
                                       <li>

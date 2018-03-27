@@ -38,10 +38,11 @@ class MessageController extends Controller
      *
      * @return mixed
      */
-    public function create()
+    public function create($id)
     {
-        $users = User::where('id', '!=', Auth::id())->get();
-        return view('messenger.create', compact('users'));
+        $user = User::find($id);
+        //$users = User::where('id', '!=', Auth::id())->get();
+        return view('messages.create', ['user' => $user]);
     }
 
 
@@ -132,16 +133,5 @@ class MessageController extends Controller
             $thread->addParticipant(Input::get('recipients'));
         }
         return redirect()->route('messages.show', $id);
-    }
-
-    public function contacts($id){
-    	$userCompany = User::find($id)
-		  	
-    	$users = User::where([
-    		['id', '<>', $id],
-    		['company_id', $userCompany->company_id],
-    	])->get();
-
-    	return $users;
     }
 }
