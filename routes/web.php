@@ -19,5 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+//Route::resource('items', 'ItemController');
+Route::get('/index/{companyid}', 'Itemcontroller@index');
+
 Route::get('/{email}', 'UserController@edit')->name('user.edit');
+
 Route::put('/users/{user}', 'UserController@update')->name('user.update');

@@ -60,7 +60,7 @@
                         <li>
                             @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
                                 <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
-                                    <i class="fa fa-fw fa-power-off"></i>aaa {{ trans('adminlte::adminlte.log_out') }}
+                                    <i class="fa fa-fw fa-power-off"></i>{{ trans('adminlte::adminlte.log_out') }}
                                 </a>
                             @else
                                 <!--Desde aqui-->
@@ -262,14 +262,21 @@
                                   <!-- User Account: style can be found in dropdown.less -->
                                   <li class="dropdown user user-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                      <img src="{{ Storage::url(Auth::user()->avatar) }}" class="user-image" alt="User Image">
+                                      @if(substr(Auth::user()->avatar, 0, 4) == 'http' )
+                                        <img src="{{ Auth::user()->avatar }}" class="user-image" alt="User Image">
+                                      @else
+                                        <img src="{{ Storage::url(Auth::user()->avatar) }}" class="user-image" alt="User Image">
+                                      @endif
                                       <span class="hidden-xs">{{ Auth::user()->first_name }}</span>
                                     </a>
                                     <ul class="dropdown-menu">
                                       <!-- User image -->
                                       <li class="user-header">
-                                        <img src="{{ Storage::url(Auth::user()->avatar) }}" class="img-circle" alt="User Image">
-
+                                        @if(substr(Auth::user()->avatar, 0, 4) == 'http' )
+                                          <img src="{{ Auth::user()->avatar }}" class="img-circle" alt="User Image">
+                                        @else
+                                          <img src="{{ Storage::url(Auth::user()->avatar) }}" class="img-circle" alt="User Image">
+                                        @endif
                                         <p>
                                           {{ Auth::user()->first_name }}
                                           <small>Member since {{ Auth::user()->created_at }}</small>
@@ -335,7 +342,7 @@
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
 
-                <!-- Sidebar Menu -->
+                <!-- Sidebar Menu -->.
                 <ul class="sidebar-menu" data-widget="tree">
                     @each('adminlte::partials.menu-item', $adminlte->menu(), 'item')
                 </ul>

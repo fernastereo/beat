@@ -19,18 +19,29 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(255);
 
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
-            $event->menu->add('CORREO');
             $event->menu->add(
                 [
-                    'text' => 'Mensajes',
-                    'url' => '/inbox/' . Auth::user()->email,
-                    'label' => 18,
+                    'text' => 'Inicio',
+                    'url' => '/dashboard',
+                ]
+            );
+            $event->menu->add('ADMINISTRACION');
+            $event->menu->add(
+                [
+                    'text' => 'Artículos',
+                    'url' => '/index/' . Auth::user()->company_id,
                 ]
             );
             $event->menu->add(
                 [
-                    'text' => 'Redactar',
-                    'url' => 'admin/blog',
+                    'text' => 'Clientes',
+                    'url' => '/home',
+                ]
+            );
+            $event->menu->add(
+                [
+                    'text' => 'Proveedores',
+                    'url' => '/home',
                 ]
             );
         });
