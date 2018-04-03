@@ -30,4 +30,20 @@ class User extends Authenticatable
     public function company(){
         return $this->belongsTo(Company::class);
     }
+
+    public function getAvatarAttribute($avatar){
+        /*
+        Este método (get<Propiedad>Attribute) intercepta el llamado a una propiedad del modelo, es decir, 
+        cuando se llame a la propiedad en algun sitio ($user->avatar) en realidad se estará invocando 
+        este metodo que toma como parámetro el valor de la propiedad en el momento del llamado.
+        Por eso es que en la vista no se invoca sino que se sigue llamando a la propiedad normalmente.
+        */
+        //if(substr(Auth::user()->avatar, 0, 4) == 'http' )
+        if(!$avatar || starts_with($avatar, 'http')){
+            return $avatar;
+        }
+
+        return \Storage::url($avatar);
+    }
+
 }

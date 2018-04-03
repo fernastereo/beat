@@ -19,9 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
-//Route::resource('items', 'ItemController');
-Route::get('/index/{companyid}', 'Itemcontroller@index');
+
+Route::get('/items/company/{companyid}', 'Itemcontroller@index')->name('items.index');
+Route::get('/items/{item}/state', 'Itemcontroller@state')->name('items.state');
+Route::resource('items', 'ItemController');
 
 Route::get('/{email}', 'UserController@edit')->name('user.edit');
-
 Route::put('/users/{user}', 'UserController@update')->name('user.update');

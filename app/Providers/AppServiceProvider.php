@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
             $event->menu->add(
                 [
                     'text' => 'Artículos',
-                    'url' => '/index/' . Auth::user()->company_id,
+                    'url' => '/items/company/' . Auth::user()->company_id,
                 ]
             );
             $event->menu->add(

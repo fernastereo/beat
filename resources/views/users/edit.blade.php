@@ -56,7 +56,7 @@
             <div class="form-group">
                 <label for="exampleInputFile">Avatar:</label>
                 <input type="file" id="avatar" name="avatar">
-                <p class="help-block">Example block-level help text here.</p>
+                <!--<p class="help-block">Example block-level help text here.</p>-->
             </div>                
           </div>
           <div class="box-footer">
