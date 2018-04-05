@@ -18,7 +18,7 @@ class ItemController extends Controller
     public function index($companyid)
     {
         
-        $items = Item::where('company_id', $companyid)->paginate(10);
+        $items = Item::where('company_id', $companyid)->orderBy('name', 'asc')->paginate(10);
 
         return view('items.index', ['items' => $items]);
     }

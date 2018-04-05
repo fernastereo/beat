@@ -60,8 +60,8 @@
             				<tbody>
             					@foreach ($items as $item)
 									<tr role="row" class="odd">
-										<td>{{ $item->name }}</td>
-										<td>{{ $item->description }}</td>
+										<td class="text-capitalize">{{ $item->name }}</td>
+										<td class="text-capitalize">{{ $item->description }}</td>
 										<td class="text-right">{{ number_format($item->price, 2, ',', '.') }}</td>
 										<td class="text-right">{{ number_format($item->stock, 2, ',', '.') }}</td>
 										<td><a href="{{ route('items.show', $item->id) }}" class="btn btn-primary btn-xs">{{ trans('adminlte::adminlte.view') }}</a></td>
