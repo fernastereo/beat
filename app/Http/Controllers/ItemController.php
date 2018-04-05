@@ -28,9 +28,12 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($companyid)
     {
-        //
+        $item = new Item;
+        $locations = Location::where('company_id', $companyid)->get();
+        $units = Unit::where('company_id', $companyid)->get();
+        return view('items.create', ['item' => $item, 'locations' => $locations, 'units' => $units, 'company_id' => $companyid]);
     }
 
     /**
@@ -39,9 +42,35 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UpdateItemRequest $request)
     {
-        //
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+        }
+        $item = Item::create([
+            'id_item'       => $request->input('id_item'),
+            'name'          => $request->input('name'),
+            'description'   => $request->input('description'),
+            'company_id'    => $request->input('company_id'),
+            'location_id'   => $request->input('location_id'),
+            'cost'          => $request->input('cost'),
+            'price'         => $request->input('price'),
+            'unit_id'       => $request->input('unit_id'),
+            'stock'         => $request->input('stock'),
+            'stock_min'     => $request->input('stock_min'),
+            'stock_max'     => $request->input('stock_max'),
+            'include_iva'   => $request->has('include_iva'),
+            'tax_iva'       => $request->input('tax_iva'),
+            'max_discount'  => $request->input('max_discount'),
+            'state'         => $request->has('state'),
+            'image'         => $image->store('items', 'public'),
+        ]);
+
+        if($item){
+            return redirect()->route('items.company', $item->company_id)->with('success', trans('adminlte::adminlte.update_succeeded'));
+        }
+
+        return back()->withInput()->with('errors', tranas('adminlte::adminlte.update_error'));
     }
 
     /**
@@ -70,7 +99,22 @@ class ItemController extends Controller
     }
 
     public function state(Item $item){
-        return 'Esto es state en controller';
+        if($item->state == false){
+            $state = true;
+        }
+        else{
+            $state = false;
+        }
+
+        $item->update([
+            'state' => $state,
+        ]);
+
+        if($item){
+            return redirect()->route('items.company', [$item->company_id])->with('success', trans('adminlte::adminlte.update_succeeded'));
+        }
+
+        return back()->withInput()->with('errors', trans('adminlte::adminlte.update_error'));
     }
     /**
      * Update the specified resource in storage.
@@ -79,7 +123,7 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(UpdateItemRequest $request, Item $item)
     {
         if($request->hasFile('image')){
             $item->image = $request->file('image')->store('public');

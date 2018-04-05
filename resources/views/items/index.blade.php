@@ -8,6 +8,7 @@
 	<div class="box">
         <div class="box-header">
 			<h3 class="box-title">{{ trans('adminlte::adminlte.items') }}</h3>
+			<a href="{{ route('items.create.company', Auth::user()->company_id) }}" class="pull-right btn btn-primary">Crear Nuevo</a>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -42,13 +43,13 @@
                 					<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 224px;">
                 					{{ trans('adminlte::adminlte.name') }}
                 					</th>
-                					<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 199px;">
+                					<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 287px;">
                 					{{ trans('adminlte::adminlte.description') }}
                 					</th>
-                					<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 156px;">
+                					<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 90px;">
                 					{{ trans('adminlte::adminlte.price') }}
                 					</th>
-                					<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 112px;">
+                					<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 90px;">
                 					{{ trans('adminlte::adminlte.stock') }}
                 					</th>
                 					<th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 182px;" colspan="3">
@@ -65,7 +66,9 @@
 										<td class="text-right">{{ number_format($item->stock, 2, ',', '.') }}</td>
 										<td><a href="{{ route('items.show', $item->id) }}" class="btn btn-primary btn-xs">{{ trans('adminlte::adminlte.view') }}</a></td>
 										<td><a href="{{ route('items.edit', $item->id) }}" class="btn btn-warning btn-xs">{{ trans('adminlte::adminlte.edit') }}</a></td>
-										<td><a href="{{ route('items.state', $item->id) }}" class="btn btn-danger btn-xs">{{ trans('adminlte::adminlte.deactivate') }}</a></td>
+										<td><a href="{{ route('items.state', $item->id) }}" 
+											onclick="return confirm('¿Está seguro que desea @if($item->state == false) {{ trans('adminlte::adminlte.activate') }} @else {{ trans('adminlte::adminlte.deactivate') }} @endif este artículo?')" 
+											class="btn @if($item->state == false) btn-success @else btn-danger @endif btn-xs">@if($item->state == false) {{ trans('adminlte::adminlte.activate') }} @else {{ trans('adminlte::adminlte.deactivate') }} @endif</a></td>
 									</tr>
 								@endforeach
 							</tbody>

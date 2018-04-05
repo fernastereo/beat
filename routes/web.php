@@ -20,8 +20,18 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 
-Route::get('/items/company/{companyid}', 'Itemcontroller@index')->name('items.index');
+/*
+Nota para "Mi del futuro": cuando vayas a crear una ruta cuyo nombre es igual a alguna 
+de las rutas que vienen por defecto, debes colocarle un nombre diferente a esta, así 
+vayan a apuntar al mismo método del controlador o tengan la misma Url.
+
+Por ejemplo: si vas a crear una nueva ruta para create su name no puede ser modelo.create
+debería ser modelo.create.algo.
+*/
+Route::get('/items/company/{companyid}', 'Itemcontroller@index')->name('items.company');
 Route::get('/items/{item}/state', 'Itemcontroller@state')->name('items.state');
+Route::get('/items/create/{companyid}', 'Itemcontroller@create')->name('items.create.company');
+
 Route::resource('items', 'ItemController');
 
 Route::get('/{email}', 'UserController@edit')->name('user.edit');

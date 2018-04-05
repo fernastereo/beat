@@ -15,7 +15,7 @@
 						<ul class="dropdown-menu">
 							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Ingresar Compra</a></li>
 							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Facturar</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('items.company', $item->company_id) }}">Artículos</a></li>
 							<li role="presentation" class="divider"></li>
 							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
 						</ul>

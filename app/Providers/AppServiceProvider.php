@@ -11,7 +11,7 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
+     * 
      * @return void
      */
     public function boot(Dispatcher $events)
@@ -22,14 +22,14 @@ class AppServiceProvider extends ServiceProvider
             $event->menu->add(
                 [
                     'text' => 'Inicio',
-                    'url' => '/dashboard',
+                    'url' => route('dashboard'),
                 ]
             );
             $event->menu->add('ADMINISTRACION');
             $event->menu->add(
                 [
                     'text' => 'Artículos',
-                    'url' => '/items/company/' . Auth::user()->company_id,
+                    'url' => route('items.company', Auth::user()->company_id),
                 ]
             );
             $event->menu->add(
