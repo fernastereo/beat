@@ -45,7 +45,11 @@
 								<label class="form-control input-sm">{{ $item->unit->name }}</label>
 					        </div>
 					        <div class="form-group">
-								<input type="checkbox" checked="{{ $item->state }}">
+								@if($item->state == 0)
+									<input class="" type="checkbox" id="state" name="state">
+								@else
+									<input class="" type="checkbox" id="state" name="state" checked>
+								@endif
 								<label for="state">Activo</label>
 					        </div>
 						</div>
@@ -75,7 +79,13 @@
 						        </div>
 						        <div class="form-group">
 									<label>IVA Incluido:</label>
-									<label class="form-control input-sm"><input class="" type="checkbox" id="include_iva" checked="{{ $item->include_iva }}"></label>
+									<label class="form-control input-sm">
+										@if($item->include_iva == 0)
+											<input class="" type="checkbox" id="include_iva">
+										@else
+											<input class="" type="checkbox" id="include_iva" checked>
+										@endif
+									</label>
 						        </div>
 						        <div class="form-group">
 									<label>Tarifa IVA:</label>
