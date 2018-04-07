@@ -32,11 +32,17 @@ class DatabaseSeeder extends Seeder
             		'company_id' => $company->id,
             	]);
 
+            $taxes = factory(App\Tax::class, random_int(2, 4))
+                ->create([
+                    'company_id' => $company->id,
+                ]);
+
             $items = factory(App\Item::class, random_int(5, 50))
                 ->create([
                     'company_id' => $company->id,
                     'location_id' => $company->locations->random(2)->first()->id,
                     'unit_id' => $company->units->random(2)->first()->id,
+                    'tax_id' => $company->taxes->random(2)->first()->id,
                 ]);
         });
     }

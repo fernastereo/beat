@@ -35,7 +35,7 @@ class UpdateItemRequest extends FormRequest
             'stock'         => 'integer|min:0',
             'stock_min'     => 'integer|min:0',
             'stock_max'     => 'integer|min:0',
-            'tax_iva'       => 'required|integer|min:0',
+            'tax_id'        => 'integer',
             'max_discount'  => 'numeric|min:0',
         ];
     }
@@ -59,9 +59,7 @@ class UpdateItemRequest extends FormRequest
             'stock_min.integer'     => 'Existencia Actual debe ser un valor numérico',
             'stock_max.min'         => 'Existencia Máxima debe ser un valor mayor a 0',
             'stock_max.integer'     => 'Existencia Actual debe ser un valor numérico',
-            'tax_iva.required'      => 'Tarifa IVA no puede ser vacío',
-            'tax_iva.min'           => 'Tarifa IVA debe ser un valor mayor a 0',
-            'tax_iva.integer'       => 'Tarifa IVA debe ser un valor numérico',
+            'tax_id.required'       => 'Tarifa IVA no puede ser vacío',
             'max_discount'          => 'Descuento Máximo debe ser un valor mayor a 0',
             'max_discount.numeric'  => 'Descuento Máximo debe ser un valor numérico',
         ];

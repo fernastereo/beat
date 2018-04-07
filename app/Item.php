@@ -19,8 +19,8 @@ class Item extends Model
         'stock',
         'stock_min',
         'stock_max',
-        'include_iva',
-        'tax_iva',
+        'tax_id',
+        'included_tax',
         'max_discount',
         'state',
     ];
@@ -35,6 +35,10 @@ class Item extends Model
 
     public function unit(){
     	return $this->belongsTo(Unit::class);
+    }
+
+    public function tax(){
+        return $this->belongsTo(Tax::class);
     }
 
 	public function getImageAttribute($image){

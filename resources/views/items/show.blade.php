@@ -80,16 +80,16 @@
 						        <div class="form-group">
 									<label>IVA Incluido:</label>
 									<label class="form-control input-sm">
-										@if($item->include_iva == 0)
-											<input class="" type="checkbox" id="include_iva">
+										@if($item->included_tax == 0)
+											<input class="" type="checkbox" id="included_tax">
 										@else
-											<input class="" type="checkbox" id="include_iva" checked>
+											<input class="" type="checkbox" id="included_tax" checked>
 										@endif
 									</label>
 						        </div>
 						        <div class="form-group">
 									<label>Tarifa IVA:</label>
-									<label class="form-control input-sm">{{ $item->tax_iva }}</label>
+									<label class="form-control input-sm">{{ $item->tax->name . ' (' . $item->tax->tax . '%)' }}</label>
 						        </div>
 						        <div class="form-group">
 									<label>Descuento Máximo:</label>

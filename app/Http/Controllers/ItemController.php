@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Item;
 use App\Location;
 use App\Unit;
+use App\Tax;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateItemRequest;
 
@@ -33,7 +34,13 @@ class ItemController extends Controller
         $item = new Item;
         $locations = Location::where('company_id', $companyid)->get();
         $units = Unit::where('company_id', $companyid)->get();
-        return view('items.create', ['item' => $item, 'locations' => $locations, 'units' => $units, 'company_id' => $companyid]);
+        $taxes = Tax::where('company_id', $companyid)->get();
+        return view('items.create', [
+            'item'      => $item, 
+            'locations' => $locations, 
+            'units'     => $units, 
+            'taxes'     => $taxes,
+            'company_id' => $companyid]);
     }
 
     /**
@@ -44,9 +51,6 @@ class ItemController extends Controller
      */
     public function store(UpdateItemRequest $request)
     {
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-        }
         $item = Item::create([
             'id_item'       => $request->input('id_item'),
             'name'          => $request->input('name'),
@@ -59,12 +63,16 @@ class ItemController extends Controller
             'stock'         => $request->input('stock'),
             'stock_min'     => $request->input('stock_min'),
             'stock_max'     => $request->input('stock_max'),
-            'include_iva'   => $request->has('include_iva'),
-            'tax_iva'       => $request->input('tax_iva'),
+            'tax_id'       => $request->input('tax_id'),
+            'included_tax'  => $request->has('included_tax'),
             'max_discount'  => $request->input('max_discount'),
             'state'         => $request->has('state'),
-            'image'         => $image->store('items', 'public'),
         ]);
+
+        if($request->hasFile('image')){
+            $item->image = $request->file('image')->store('public');
+        }
+        $item->save();
 
         if($item){
             return redirect()->route('items.company', $item->company_id)->with('success', trans('adminlte::adminlte.update_succeeded'));
@@ -95,7 +103,13 @@ class ItemController extends Controller
     {
         $locations = Location::where('company_id', $item->company_id)->get();
         $units = Unit::where('company_id', $item->company_id)->get();
-        return view('items.edit', ['item' => $item, 'locations' => $locations, 'units' => $units]);
+        $taxes = Tax::where('company_id', $item->company_id)->get();
+        return view('items.edit', [
+            'item'      => $item, 
+            'locations' => $locations, 
+            'units'     => $units,
+            'taxes'     => $taxes,
+        ]);
     }
 
     public function state(Item $item){
@@ -140,8 +154,8 @@ class ItemController extends Controller
             'stock'         => $request->input('stock'),
             'stock_min'     => $request->input('stock_min'),
             'stock_max'     => $request->input('stock_max'),
-            'include_iva'   => $request->has('include_iva'),
-            'tax_iva'       => $request->input('tax_iva'),
+            'tax_id'        => $request->input('tax_id'),
+            'included_tax'  => $request->has('included_tax'),
             'max_discount'  => $request->input('max_discount'),
             'state'         => $request->has('state'),
         ]);
