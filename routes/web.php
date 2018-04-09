@@ -28,11 +28,15 @@ vayan a apuntar al mismo método del controlador o tengan la misma Url.
 Por ejemplo: si vas a crear una nueva ruta para create su name no puede ser modelo.create
 debería ser modelo.create.algo.
 */
-Route::get('/items/company/{companyid}', 'Itemcontroller@index')->name('items.company');
-Route::get('/items/{item}/state', 'Itemcontroller@state')->name('items.state');
-Route::get('/items/create/{companyid}', 'Itemcontroller@create')->name('items.create.company');
-
+Route::get('/items/company/{companyid}', 'ItemController@index')->name('items.company');
+Route::get('/items/{item}/state', 'ItemController@state')->name('items.state');
+Route::get('/items/create/{companyid}', 'ItemController@create')->name('items.create.company');
 Route::resource('items', 'ItemController');
+
+Route::get('persons/company/{companyid}/{type}', 'PersonController@index')->name('persons.company');
+Route::get('persons/{person}/state', 'PersonController@state')->name('persons.state');
+Route::get('persons/create/{companyid}', 'PersonController@create')->name('persons.create.company');
+Route::resource('persons', 'PersonController');
 
 Route::get('/{email}', 'UserController@edit')->name('user.edit');
 Route::put('/users/{user}', 'UserController@update')->name('user.update');

@@ -35,13 +35,15 @@ class AppServiceProvider extends ServiceProvider
             $event->menu->add(
                 [
                     'text' => 'Clientes',
-                    'url' => '/home',
+                    'url' => route('persons.company', ['companyid' => Auth::user()->company_id, 
+                                                        'type' => 'C']),
                 ]
             );
             $event->menu->add(
                 [
                     'text' => 'Proveedores',
-                    'url' => '/home',
+                    'url' => route('persons.company', ['companyid' => Auth::user()->company_id, 
+                                                        'type' => 'S']),
                 ]
             );
         });

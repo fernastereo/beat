@@ -44,6 +44,11 @@ class DatabaseSeeder extends Seeder
                     'unit_id' => $company->units->random(2)->first()->id,
                     'tax_id' => $company->taxes->random(2)->first()->id,
                 ]);
+
+            $persons = factory(App\Person::class, random_int(30, 60))
+                ->create([
+                    'company_id' => $company->id,
+                ]);
         });
     }
 }

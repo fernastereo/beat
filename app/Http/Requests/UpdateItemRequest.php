@@ -28,14 +28,14 @@ class UpdateItemRequest extends FormRequest
             'name'          => 'required|string|max:255',
             'description'   => 'string|max:255',
             'image'         => 'image',
-            'location_id'   => 'integer',
+            'location_id'   => 'integer|min:1',
             'cost'          => 'numeric|min:0',
             'price'         => 'required|numeric|min:0',
-            'unit_id'       => 'integer',
+            'unit_id'       => 'integer|min:1',
             'stock'         => 'integer|min:0',
             'stock_min'     => 'integer|min:0',
             'stock_max'     => 'integer|min:0',
-            'tax_id'        => 'integer',
+            'tax_id'        => 'integer|min:1',
             'max_discount'  => 'numeric|min:0',
         ];
     }
@@ -62,6 +62,9 @@ class UpdateItemRequest extends FormRequest
             'tax_id.required'       => 'Tarifa IVA no puede ser vacío',
             'max_discount'          => 'Descuento Máximo debe ser un valor mayor a 0',
             'max_discount.numeric'  => 'Descuento Máximo debe ser un valor numérico',
+            'location_id.min'       => 'Debe elegir una ubicación de la lista',
+            'unit_id.min'           => 'Debe elegir una Unidad de Medida de la lista',
+            'tax_id.min'            => 'Debe elegir una Tarifa de la lista',
         ];
     }
 }

@@ -19,9 +19,9 @@
 		    		<option value="0">-- Seleccione Ubicación --</option>
 		    		@foreach($locations as $location)
 		    			@if($location->id == old('location_id', $location->id))
-							<option value="{{ old('location_id', $location->id) }}" selected="true">{{ $location->name }}</option>
+							<option value="{{ $location->id }}" selected="true">{{ $location->name }}</option>
 		      			@else
-		        			<option value="{{ old('location_id', $location->id) }}">{{ $location->name }}</option>
+		        			<option value="{{ $location->id }}">{{ $location->name }}</option>
 		      			@endif
 		    		@endforeach
 				</select>
@@ -33,17 +33,17 @@
 				<select class="form-control input-sm" id="unit_id" name="unit_id">
 		    		<option value="0">-- Seleccione Ubicación --</option>
 		    		@foreach($units as $unit)
-		    			@if($unit->id == old('unid_id', $unit->id))
-							<option value="{{ old('unid_id', $unit->id) }}" selected="true">{{ $unit->name }}</option>
+		    			@if($unit->id == old('unit_id', $unit->id))
+							<option value="{{ $unit->id }}" selected="true">{{ $unit->name }}</option>
 		      			@else
-		        			<option value="{{ old('unid_id', $unit->id) }}">{{ $unit->name }}</option>
+		        			<option value="{{ $unit->id }}">{{ $unit->name }}</option>
 		      			@endif
 		    		@endforeach
 				</select>
 			</div>
 		@endif
         <div class="form-group col-md-6">
-			@if(old('state', $item->state) == 0)
+			@if(old('state', $item->state) == false)
 				<input class="" type="checkbox" id="state" name="state">
 			@else
 				<input class="" type="checkbox" id="state" name="state" checked>
@@ -78,7 +78,7 @@
 	        <div class="form-group">
 				<label for="included_tax">IVA Incluido:<span class="required"></span></label>
 				<label class="form-control input-sm">
-					@if(old('included_tax', $item->include_iva) == 0)
+					@if(old('included_tax', $item->included_tax) == false)
 						<input class="" type="checkbox" id="included_tax" name="included_tax">
 					@else
 						<input class="" type="checkbox" id="included_tax" name="included_tax" checked>
@@ -92,9 +92,9 @@
 						<option value="0">-- Seleccione Tarifa --</option>
 						@foreach($taxes as $tax)
 							@if($tax->id == old('tax_id', $tax->id))
-								<option value="{{ old('tax_id', $tax->id) }}" selected="true">{{ $tax->name . ' (' . $tax->tax . '%)' }}</option>
+								<option value="{{ $tax->id }}" selected="true">{{ $tax->name . ' (' . $tax->tax . '%)' }}</option>
 							@else
-								<option value="{{ old('tax_id', $tax->id) }}">{{ $tax->name . ' (' . $tax->tax . '%)' }}</option>
+								<option value="{{ $tax->id }}">{{ $tax->name . ' (' . $tax->tax . '%)' }}</option>
 							@endif
 						@endforeach
 					</select>

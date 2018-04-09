@@ -19,7 +19,7 @@ class ItemController extends Controller
     public function index($companyid)
     {
         
-        $items = Item::where('company_id', $companyid)->orderBy('name', 'asc')->paginate(10);
+        $items = Item::where('company_id', $companyid)->orderBy('name', 'asc')->paginate(20);
 
         return view('items.index', ['items' => $items]);
     }
@@ -63,7 +63,7 @@ class ItemController extends Controller
             'stock'         => $request->input('stock'),
             'stock_min'     => $request->input('stock_min'),
             'stock_max'     => $request->input('stock_max'),
-            'tax_id'       => $request->input('tax_id'),
+            'tax_id'        => $request->input('tax_id'),
             'included_tax'  => $request->has('included_tax'),
             'max_discount'  => $request->input('max_discount'),
             'state'         => $request->has('state'),
@@ -139,6 +139,8 @@ class ItemController extends Controller
      */
     public function update(UpdateItemRequest $request, Item $item)
     {
+
+        //dd($request);
         if($request->hasFile('image')){
             $item->image = $request->file('image')->store('public');
         }

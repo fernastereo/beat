@@ -27,4 +27,8 @@ class Company extends Model
     public function taxes(){
         return $this->hasMany(Tax::class);
     }
+
+    public function persons(){
+        return $this->hasMany(Person::class);
+    }
 }
