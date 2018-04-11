@@ -15,7 +15,7 @@
 						<ul class="dropdown-menu">
 							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Ingresar Compra</a></li>
 							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Facturar</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('items.company', $item->company_id) }}">Artículos</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('items.company', $item->company_id) }}">Ver Artículos</a></li>
 							<li role="presentation" class="divider"></li>
 							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
 						</ul>
@@ -46,9 +46,9 @@
 					        </div>
 					        <div class="form-group">
 								@if($item->state == 0)
-									<input class="" type="checkbox" id="state" name="state">
+									<input class="" type="checkbox" id="state" name="state" disabled="true">
 								@else
-									<input class="" type="checkbox" id="state" name="state" checked>
+									<input class="" type="checkbox" id="state" name="state" disabled="true" checked>
 								@endif
 								<label for="state">Activo</label>
 					        </div>
@@ -81,9 +81,9 @@
 									<label>IVA Incluido:</label>
 									<label class="form-control input-sm">
 										@if($item->included_tax == 0)
-											<input class="" type="checkbox" id="included_tax">
+											<input class="" type="checkbox" id="included_tax" disabled="true">
 										@else
-											<input class="" type="checkbox" id="included_tax" checked>
+											<input class="" type="checkbox" id="included_tax" disabled="true" checked>
 										@endif
 									</label>
 						        </div>

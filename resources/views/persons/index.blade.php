@@ -6,7 +6,7 @@
 	<div class="box">
         <div class="box-header">
 			<h3 class="box-title">@if($type == 'C') Clientes @elseif($type == 'S') Proveedores @else Terceros @endif</h3>
-			<a href="{{ route('persons.create.company', Auth::user()->company_id) }}" class="pull-right btn btn-primary">Crear Nuevo</a>
+			<a href="{{ route('persons.create.company', ['companyid' => Auth::user()->company_id, 'type' => $type]) }}" class="pull-right btn btn-primary">Crear Nuevo</a>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -60,7 +60,7 @@
 									<tr role="row" class="odd">
 										<td class="text-capitalize">{{ $person->name }}</td>
 										<td>{{ $person->id_person }}</td>
-										<td class="text-right">{{ $person->company->name }}</td>
+										<td class="text-right">{{ $person->phone_number_1 }}</td>
 										<td class="text-right">{{ $person->cellphone_number_1 }}</td>
 										<td><a href="{{ route('persons.show', $person->id) }}" class="btn btn-primary btn-xs">{{ trans('adminlte::adminlte.view') }}</a></td>
 										<td><a href="{{ route('persons.edit', $person->id) }}" class="btn btn-warning btn-xs">{{ trans('adminlte::adminlte.edit') }}</a></td>

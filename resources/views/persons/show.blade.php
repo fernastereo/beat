@@ -15,7 +15,7 @@
 						<ul class="dropdown-menu">
 							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Ingresar Compra</a></li>
 							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Facturar</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('persons.company', ['companyid' => $person->company_id, 'type' => $person->person_type]) }}">Artículos</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('persons.company', ['companyid' => $person->company_id, 'type' => $person->person_type]) }}">Ver Terceros</a></li>
 							<li role="presentation" class="divider"></li>
 							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
 						</ul>
@@ -23,9 +23,9 @@
 				</div>
 				<form class="">
 		      		<div class="box-body">
-						<div class="row" style="border: 1px solid red">
-							<div class="form-group col-md-6" style="border: 1px solid blue" >
-								<div class="col-md-6" style="border: 1px solid yellow">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group col-md-6">
 									<label>Identificación:</label>
 									<div class="input-group input-group-sm">
 										<label class="form-control input-sm">{{ $person->id_person }}</label>
@@ -35,7 +35,7 @@
 									</div>
 								</div>
   					        </div>
-  					        <div class="form-group col-md-6">
+  					        <div class="col-md-6">
 						        <div class="form-group col-md-6">
 									<label>Teléfono 1:</label>
 									<label class="form-control input-sm">{{ $person->phone_number_1 }}</label>
@@ -47,44 +47,92 @@
 					    	</div>
 						</div>
 
-						<div class="row" style="border: 1px solid red">
-					        <div class="form-group col-md-6">
-								<div class="col-md-12">
+						<div class="row">
+					        <div class="col-md-6">
+								<div class="form-group col-md-12">
 									<label>Nombre:</label>
 									<label class="form-control input-sm">{{ $person->name }}</label>
 								</div>
 					        </div>
-					        <div class="form-group col-md-6">
+					        <div class="col-md-6">
 								<div class="form-group col-md-6">
 									<label>Teléfono Celular:</label>
 									<label class="form-control input-sm">{{ $person->cellphone_number_1 }}</label>
 						        </div>
 					        </div>
 						</div>
+
 						<div class="row">
-					        <div class="form-group col-md-12">
-								<label >Dirección:</label>
-								<label class="form-control input-sm">{{ $person->address }}</label>
+							<div class="col-md-6">
+						        <div class="form-group col-md-12">
+									<label>Dirección:</label>
+									<label class="form-control input-sm">{{ $person->address }}</label>
+						        </div>
+						    </div>
+						    <div class="col-md-6">
+						    	<div class="form-group col-md-6">
+						    		<label>Cupo de Crédito:</label>
+						    		<label class="form-control input-sm text-right">{{ number_format($person->credit_limit, 2, ',', '.') }}</label>
+						    	</div>
+						    	<div class="form-group col-md-6">
+						    		<label>Crédito Usado:</label>
+						    		<label class="form-control input-sm text-right">{{ number_format($person->credit_used, 2, ',', '.') }}</label>
+						    	</div>
+						    </div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+						        <div class="form-group col-md-12">
+									<label >Ciudad:</label>
+									<label class="form-control input-sm">{{ $person->city_name }}</label>
+						        </div>
+							</div>
+					        <div class="col-md-6">
+								<div class="form-group col-md-6">
+							        <div class="checkbox">
+										<label>
+											@if($person->person_type == 'C' || $person->person_type == 'B')
+												<input class="" type="checkbox" id="state" name="state" disabled="true" checked>Cliente
+											@else
+												<input class="" type="checkbox" id="state" name="state" disabled="true">Cliente
+											@endif
+										</label>
+							        </div>
+							        <div class="checkbox">
+										<label>
+											@if($person->person_type == 'S' || $person->person_type == 'B')
+												<input class="" type="checkbox" id="state" name="state" disabled="true" checked>Proveedor
+											@else
+												<input class="" type="checkbox" id="state" name="state" disabled="true">Proveedor
+											@endif
+										</label>
+							        </div>
+								</div>					        	
 					        </div>
 						</div>
+
 						<div class="row">
-					        <div class="form-group col-md-12">
-								<label >Ciudad:</label>
-								<label class="form-control input-sm">{{ $person->city_name }}</label>
+					        <div class="col-md-6">
+					        	<div class="form-group col-md-12">
+									<label >E-mail:</label>
+									<label class="form-control input-sm"><a href="mailto:{{ $person->email }}">{{ $person->email }}</a></label>
+									<div class="checkbox">
+										<label>
+											@if($person->state == 0)
+												<input class="" type="checkbox" id="state" name="state" disabled="true">Activo
+											@else
+												<input class="" type="checkbox" id="state" name="state" disabled="true" checked>Activo
+											@endif
+										</label>
+							        </div>
+								</div>
 					        </div>
-						</div>
-						<div class="row">
-					        <div class="form-group col-md-12">
-								<label >E-mail:</label>
-								<a href="mailto:{{ $person->email }}">{{ $person->email }}</a>
-					        </div>
-					        <div class="form-group">
-								@if($person->state == 0)
-									<input class="" type="checkbox" id="state" name="state">
-								@else
-									<input class="" type="checkbox" id="state" name="state" checked>
-								@endif
-								<label for="state">Activo</label>
+					        <div class="col-md-6">
+								<div class="form-group col-md-12">
+									<label>Observaciones:</label>
+									<textarea class="form-control" rows="3" placeholder="Enter ..." disabled="">{{ $person->comments }}</textarea>
+								</div>
 					        </div>
 						</div>
 			      	</div>

@@ -78,7 +78,7 @@ class ItemController extends Controller
             return redirect()->route('items.company', $item->company_id)->with('success', trans('adminlte::adminlte.update_succeeded'));
         }
 
-        return back()->withInput()->with('errors', tranas('adminlte::adminlte.update_error'));
+        return back()->withInput()->with('errors', trans('adminlte::adminlte.update_error'));
     }
 
     /**

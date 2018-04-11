@@ -46,7 +46,7 @@ class UpdateItemRequest extends FormRequest
             'id_item.max'           => 'Código tiene mas de 25 caracteres',
             'name.required'         => 'Nombre No puede ser vacío',
             'name.max'              => 'Nombre tiene mas de 255 caracteres',
-            'description.max'       => 'Nombre tiene mas de 255 caracteres',
+            'description.max'       => 'Descripción tiene mas de 255 caracteres',
             'image.image'           => trans('adminlte::adminlte.image_update_error'),
             'cost.min'              => 'Costo debe ser un valor mayor a 0',
             'cost.numeric'          => 'Costo Máximo debe ser un valor numérico',

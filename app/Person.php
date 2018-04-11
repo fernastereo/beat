@@ -9,7 +9,7 @@ class Person extends Model
 	protected $table = 'persons';
 	
 	protected $fillable = [
-            'idperson',
+            'id_person',
             'verification_digit',
             'name',
             'address',

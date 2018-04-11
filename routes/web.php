@@ -35,7 +35,7 @@ Route::resource('items', 'ItemController');
 
 Route::get('persons/company/{companyid}/{type}', 'PersonController@index')->name('persons.company');
 Route::get('persons/{person}/state', 'PersonController@state')->name('persons.state');
-Route::get('persons/create/{companyid}', 'PersonController@create')->name('persons.create.company');
+Route::get('persons/create/{companyid}/{type}', 'PersonController@create')->name('persons.create.company');
 Route::resource('persons', 'PersonController');
 
 Route::get('/{email}', 'UserController@edit')->name('user.edit');
