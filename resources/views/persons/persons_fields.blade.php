@@ -47,16 +47,18 @@
 				<input placeholder="Dirección" id="address" name="address" type="text" class="form-control input-sm" value="{{ old('address', $person->address) }}">
 	        </div>
 	    </div>
-	    <div class="col-md-6">
-	    	<div class="form-group col-md-6">
-	    		<label for="credit_limit">Cupo de Crédito:</label>
-	    		<input placeholder="Cupo de Crédito" id="credit_limit" name="credit_limit" type="text" class="form-control input-sm text-right" value="{{ old('credit_limit', $person->credit_limit) }}">
-	    	</div>
-	    	<div class="form-group col-md-6">
-	    		<label for="credit_used">Crédito Usado:</label>
-	    		<input placeholder="Crédito Usado" id="credit_used" name="credit_used" type="text" class="form-control input-sm text-right" value="{{ old('credit_used', $person->credit_used) }}">
-	    	</div>
-	    </div>
+	    @if($type == 'C')
+		    <div class="col-md-6">
+		    	<div class="form-group col-md-6">
+		    		<label for="credit_limit">Cupo de Crédito:</label>
+		    		<input placeholder="Cupo de Crédito" id="credit_limit" name="credit_limit" type="text" class="form-control input-sm text-right" value="{{ old('credit_limit', $person->credit_limit) }}">
+		    	</div>
+		    	<div class="form-group col-md-6">
+		    		<label for="credit_used">Crédito Usado:</label>
+		    		<input placeholder="Crédito Usado" id="credit_used" name="credit_used" type="text" class="form-control input-sm text-right" value="{{ old('credit_used', $person->credit_used) }}">
+		    	</div>
+		    </div>
+	    @endif
 	</div>
 
 	<div class="row">

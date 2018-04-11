@@ -38,5 +38,8 @@ Route::get('persons/{person}/state', 'PersonController@state')->name('persons.st
 Route::get('persons/create/{companyid}/{type}', 'PersonController@create')->name('persons.create.company');
 Route::resource('persons', 'PersonController');
 
+Route::get('invoices/company/{companyid}', 'InvoiceController@index')->name('invoices.company');
+Route::resource('invoices', 'InvoiceController');
+
 Route::get('/{email}', 'UserController@edit')->name('user.edit');
 Route::put('/users/{user}', 'UserController@update')->name('user.update');

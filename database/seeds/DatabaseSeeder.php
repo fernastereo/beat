@@ -49,6 +49,12 @@ class DatabaseSeeder extends Seeder
                 ->create([
                     'company_id' => $company->id,
                 ]);
+
+            $invoices = factory(App\Invoice::class, random_int(10, 20))
+                ->create([
+                    'person_id' => $company->persons->random(30)->first()->id,
+                    'user_id' => $company->users->random(3)->first()->id,
+                ]);
         });
     }
 }

@@ -28,4 +28,8 @@ class Person extends Model
 	public function company(){
 		return $this->belongsTo(Company::class);	
 	}
+
+      public function invoices(){
+            return $this->hasMany(Invoice::class);
+      }
 }

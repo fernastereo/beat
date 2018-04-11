@@ -46,6 +46,13 @@ class AppServiceProvider extends ServiceProvider
                                                         'type' => 'S']),
                 ]
             );
+            $event->menu->add('MOVIMIENTOS');
+            $event->menu->add(
+                [
+                    'text' => 'Facturación',
+                    'url' => route('invoices.company', Auth::user()->company_id),
+                ]
+            );
         });
     }
 

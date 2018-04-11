@@ -31,6 +31,10 @@ class User extends Authenticatable
         return $this->belongsTo(Company::class);
     }
 
+    public function invoices(){
+        return $this->hasMany(Invoice::class);
+    }
+
     public function getAvatarAttribute($avatar){
         /*
         Este método (get<Propiedad>Attribute) intercepta el llamado a una propiedad del modelo, es decir, 
